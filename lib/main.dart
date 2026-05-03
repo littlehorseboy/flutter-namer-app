@@ -44,8 +44,16 @@ class MainApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatelessWidget {
+class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
+
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+
+  var selectedIndex = 0; 
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +62,7 @@ class MyHomePage extends StatelessWidget {
         children: [
           SafeArea(
             child: NavigationRail(
-              extended: false,
+              extended: true,
               destinations: [
                 NavigationRailDestination(
                   icon: Icon(Icons.home),
@@ -65,9 +73,11 @@ class MyHomePage extends StatelessWidget {
                   label: Text('Favorites'),
                 ),
               ],
-              selectedIndex: 0,
+              selectedIndex: selectedIndex,
               onDestinationSelected: (value) {
-                print('selected: $value');
+                setState(() {
+                  selectedIndex = value;
+                });
               },
             ),
           ),
